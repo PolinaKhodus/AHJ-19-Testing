@@ -1,22 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Credit Card Validator</title>
 </head>
-
 <body>
-    <!-- TODO: comment after component added -->
-    <form data-widget="innogrn-form-widget">
-        <div class="form-control">
-            <label for="innorgn-input">Введите ИНН/ОГРН</label>
-            <input id="innorgn-input" data-id="innogrn-input" type="text">
-        </div>
-        <button data-id="innogrn-submit">Далее</button>
-    </form>
-</body>
 
+<div class="cards">
+  <h1 class="cards__tittle">Validate Credit Card Numbers</h1>
+
+  <ul class="cards__list">
+    <li>
+      <span class="cards__item mir" title="Мир">mir</span>
+    </li>
+    <li>
+      <span class="cards__item visa" title="Visa">Visa</span>
+    </li>
+    <li>
+      <span class="cards__item mastercard" title="Mastercard">Mastercard</span>
+    </li>
+    <li>
+      <span class="cards__item american_express" title="American Express">American Express</span>
+    </li>
+    <li>
+      <span class="cards__item discover" title="Discover">Discover</span>
+    </li>
+    <li>
+      <span class="cards__item jcb" title="JCB">JCB</span>
+    </li>
+    <li>
+      <span class="cards__item diners_club" title="Diners Club">Diners Club</span>
+    </li>
+  </ul>
+ 
+    <form class="form">
+    <label for="form__input" class="form__label" >Check your credit card number</label>
+    <input 
+       id="form__input"
+       class="form__input" 
+       name="card_number" 
+       type="text" 
+       placeholder="Credit card number"
+       required
+    >
+    <button class="form__button">Click to Validate</button>
+    </div>
+    </form>
+</div>
+</body>
 </html>
