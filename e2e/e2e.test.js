@@ -35,6 +35,9 @@ describe('Credit Card Validator form', () => {
   });
 
   test('should add do something', async () => {
-    await page.goto(baseUrl);
+    await page.goto(baseUrl, {
+      waitUntil: "networkidle2",
+      timeout: 60000
+    });
   });
 });
