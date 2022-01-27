@@ -1,13 +1,14 @@
 /* eslint-disable linebreak-style */
-import puppetteer from 'puppeteer';
+import puppeteer from 'puppeteer';
 import { fork } from 'child_process';
 
 jest.setTimeout(30000); // default puppeteer timeout
 
-describe('Credit Card Validator form', () => {
+describe('card validation (puppeteer)', () => {
   let browser = null;
+  let page = null;
   let server = null;
-  const baseUrl = 'https://www.google.com/';
+  const baseUrl = 'http://localhost:8888';
 
   beforeAll(async () => {
     server = fork(`${__dirname}/e2e.server.js`);
@@ -20,11 +21,12 @@ describe('Credit Card Validator form', () => {
       });
     });
 
-    browser = await puppetteer.launch({
-      headless: false, // show gui
-      slowMo: 250,
-      devtools: true, // show devTools
+    browser = await puppeteer.launch({
+      // headless: false, // show gui
+      // slowMo: 100,
+      // devtools: true, // show devTools
     });
+    page = await browser.newPage();
   });
 
   afterAll(async () => {
@@ -32,16 +34,22 @@ describe('Credit Card Validator form', () => {
     server.kill();
   });
 
-  test('should add do something', async () => {
-    browser = await puppetteer.launch({
-      headless: false, // show gui
-      slowMo: 250,
-      devtools: true, // show devTools
-    });
-    const page = await browser.newPage();
-    await page.goto(baseUrl, {
-      waitUntil: "networkidle2",
-      timeout: 60000
-    });
+  test.each([
+    ['4939344763173176', 'visa'],
+    ['5333468245447699', 'mastercard'],
+    ['347469319299185', 'amex'],
+    ['6011621390591920', 'discover'],
+    ['3544094226330868', 'jcb'],
+    ['36053449243713', 'dinersclub'],
+    ['2204376782288637', 'mir'],
+  ])('luhnAlgorithm pass, identifyIssuer pass', async (number, issuer) => {
+    await page.goto(baseUrl);
+    const form = await page.$('.card-check');
+    const input = await form.$('.card-check__card-number');
+    const submitButton = await form.$('.card-check__submit-button');
+    await input.type(number);
+    submitButton.click();
+    await page.waitForSelector('.card-check-status.valid-card');
+    await page.waitForSelector(`.${issuer}.active`);
   });
 });
