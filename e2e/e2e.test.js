@@ -33,6 +33,11 @@ describe('Credit Card Validator form', () => {
   });
 
   test('should add do something', async () => {
+    browser = await puppetteer.launch({
+      headless: false, // show gui
+      slowMo: 250,
+      devtools: true, // show devTools
+    });
     const page = await browser.newPage();
     await page.goto(baseUrl, {
       waitUntil: "networkidle2",
