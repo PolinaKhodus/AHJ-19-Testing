@@ -6,7 +6,6 @@ jest.setTimeout(30000); // default puppeteer timeout
 
 describe('Credit Card Validator form', () => {
   let browser = null;
-  let page = null;
   let server = null;
   const baseUrl = 'https://www.google.com/';
 
@@ -22,11 +21,10 @@ describe('Credit Card Validator form', () => {
     });
 
     browser = await puppetteer.launch({
-      // headless: false, // show gui
-      // slowMo: 250,
-      // devtools: true, // show devTools
+      headless: false, // show gui
+      slowMo: 250,
+      devtools: true, // show devTools
     });
-    page = await browser.newPage();
   });
 
   afterAll(async () => {
@@ -35,6 +33,7 @@ describe('Credit Card Validator form', () => {
   });
 
   test('should add do something', async () => {
+    const page = await browser.newPage();
     await page.goto(baseUrl, {
       waitUntil: "networkidle2",
       timeout: 60000
