@@ -1,15 +1,19 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable linebreak-style */
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   target: 'web',
+  devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '',
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, '/dist'),
+    open: true,
+    compress: true,
   },
   module: {
     rules: [
@@ -34,11 +38,6 @@ module.exports = {
           MiniCssExtractPlugin.loader, 'css-loader',
         ],
       },
-      {
-        test: /\.(gif|png|jpg|jpeg|svg|txt)$/,
-        type: 'asset/resource',
-      },
-
     ],
   },
   plugins: [
@@ -50,5 +49,7 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };
+
