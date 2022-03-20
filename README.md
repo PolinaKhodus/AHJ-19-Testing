@@ -1,5 +1,6 @@
 # AHJ-19-Testing
-
+ [![Build status](https://ci.appveyor.com/api/projects/status/1eerkb082hgrgp9p?svg=true)](https://ci.appveyor.com/project/PolinaKhodus/ahj-19-testing)
+ https://polinakhodus.github.io/AHJ-19-Testing/
 Credit Card Validator
 Легенда
 Вам пришла задача: сделать виджет, позволяющий вводить номер карты (можете в качестве общего развития почитать про PCI DSS).
